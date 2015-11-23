@@ -24,7 +24,7 @@ APP_USAGE="Usage: $0 {\e[00;32mstart\e[00m|\e[00;31mstop\e[00m|\e[00;31mkill\e[0
 SHUTDOWN_WAIT=20
  
 app_pid() {
-  echo `ps -fe | grep $APP_BASE | grep -v grep | tr -s " "|cut -d" " -f2`
+  echo `ps -fe | grep {{zeppelin_dir}} | grep -v grep | tr -s " "|cut -d" " -f2`
 }
  
 start() {
