@@ -1,0 +1,5 @@
+hadoop_version: 2.7.1
+hadoop_dir: /home/{{user}}/hadoop-{{hadoop_version}}
+hadoop_download_url: http://wwwftp.ciril.fr/pub/apache/hadoop/common/hadoop-{{hadoop_version}}/hadoop-{{hadoop_version}}.tar.gz
+
+hadoop_ip: 127.0.0.1

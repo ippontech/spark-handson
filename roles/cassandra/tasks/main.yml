@@ -1,0 +1,55 @@
+#- name: install java
+#  apt: name=openjdk-7-jre state=present update_cache=yes         
+
+#- name: add cassandra debian repository
+#  apt_repository: repo='deb http://www.apache.org/dist/cassandra/debian 21x main' state=present
+#
+#- name: add the key for the cassandra debian repo
+#  apt_key: keyserver=pgp.mit.edu id=749D6EEC0353B12C
+#
+#- name: install cassandra
+#  apt: name=cassandra state=present update_cache=yes
+#
+#- name: copy the cassandra.yaml file
+#  template: src=cassandra.yaml dest=/etc/cassandra/
+#
+#- name: copy the cassandra-env.sh file
+#  template: src=cassandra-env.sh dest=/etc/cassandra/
+#
+#- name: make sure cassandra is started
+#  service: name=cassandra state=restarted
+
+
+- name: Check that Cassandra is installed
+  stat:
+    path={{cassandra_dir}}/bin
+  register: st
+
+- name: Download Cassandra
+  get_url:
+    url=http://www.us.apache.org/dist/cassandra/{{cassandra_version}}/apache-cassandra-{{cassandra_version}}-bin.tar.gz
+    dest=/tmp/apache-cassandra-{{cassandra_version}}-bin.tar.gz
+    timeout=60
+  when: not st.stat.exists
+
+- name: Extract Cassandra
+  unarchive:
+    src=/tmp/apache-cassandra-{{cassandra_version}}-bin.tar.gz
+    copy=no
+    dest=/tmp
+  when: not st.stat.exists
+
+- name: Copy Cassandra
+  shell: cp -r /tmp/apache-cassandra-{{cassandra_version}} {{cassandra_dir}} creates={{cassandra_dir}}/bin
+  when: not st.stat.exists
+
+- name: Configure Cassandra
+  template: src={{item}} dest={{cassandra_dir}}/conf/{{item}}
+  with_items:
+    - cassandra.yaml
+    - cassandra-env.sh
+
+- name:
+  lineinfile:
+    dest=/home/{{user}}/.bashrc
+    line='export PATH=$PATH:{{cassandra_dir}}/bin'

@@ -1,0 +1,3 @@
+training_home_parent_dir: /home/{{user}}
+training_home_dir: "{{training_home_parent_dir}}/spark-training"
+training_pom_dir: "{{training_home_parent_dir}}/spark-training/"

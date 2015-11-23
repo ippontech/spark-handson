@@ -1,0 +1,8 @@
+.vagrant/
+
+roles/azavea.java/
+roles/azavea.spark/
+roles/jgoodall.maven3/
+roles/smola.java/
+
+.DS_Store

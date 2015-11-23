@@ -1,0 +1,27 @@
+---
+- hosts: all
+
+  vars:
+    user: vagrant
+    group: vagrant
+    java_packages:
+      - oracle-java7-installer
+
+  roles:
+    - { role: desktop, sudo: true }
+    - { role: smola.java, sudo: true }
+    - { role: jgoodall.maven3, maven_version: 3.3.3, sudo: true }
+    - { role: spark }
+    #- { role: cassandra }
+    #- { role: hadoop }
+    #- { role: elasticsearch }
+    #- { role: kibana }
+    - { role: zeppelin }
+    #- { role: idea }
+    #- { role: training }
+
+  tasks:
+    - name: Setup the JAVA_HOME
+      lineinfile:
+        dest=/home/{{user}}/.bashrc
+        line="export JAVA_HOME=/usr/lib/jvm/java-7-oracle/"

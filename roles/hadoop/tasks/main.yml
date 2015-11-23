@@ -1,0 +1,33 @@
+- name: Check that Hadoop is installed
+  stat:
+    path={{hadoop_dir}}/bin
+  register: st
+
+- name: Download Hadoop
+  get_url:
+    url={{hadoop_download_url}}
+    dest=/tmp/apache-hadoop-{{hadoop_version}}-bin.tar.gz
+    timeout=60
+  when: not st.stat.exists
+
+- name: Extract Hadoop
+  unarchive:
+    src=/tmp/apache-hadoop-{{hadoop_version}}-bin.tar.gz
+    copy=no
+    dest=/tmp
+  when: not st.stat.exists
+
+- name: Copy Hadoop
+  shell: cp -r /tmp/hadoop-{{hadoop_version}} {{hadoop_dir}} creates={{hadoop_dir}}/bin
+  when: not st.stat.exists
+
+- name: Configure Hadoop
+  template: src={{item}} dest={{hadoop_dir}}/etc/hadoop/{{item}}
+  with_items:
+    - core-site.xml
+    - hdfs-site.xml
+
+- name:
+  lineinfile:
+    dest=/home/{{user}}/.bashrc
+    line='export PATH=$PATH:{{hadoop_dir}}/bin'

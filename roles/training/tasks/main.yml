@@ -1,0 +1,15 @@
+- name: Remove the source code from the home
+  file:
+    path={{training_home_dir}}
+    state=absent
+
+- name: Copy the source code
+  copy:
+    src="../spark-training/{{item}}"
+    dest={{training_home_dir}}
+  with_items:
+    - src
+    - pom.xml
+
+- name: Download Maven dependencies
+  shell: "cd {{training_pom_dir}} && mvn dependency:sources"

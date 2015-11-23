@@ -1,0 +1,27 @@
+- name: Check that Elasticsearch is installed
+  stat:
+    path={{elasticsearch_dir}}/bin
+  register: st
+
+- name: Download Elasticsearch
+  get_url:
+    url={{elasticsearch_download_url}}
+    dest=/tmp/elasticsearch-{{elasticsearch_version}}-bin.tar.gz
+    timeout=60
+  when: not st.stat.exists
+
+- name: Extract Elasticsearch
+  unarchive:
+    src=/tmp/elasticsearch-{{elasticsearch_version}}-bin.tar.gz
+    copy=no
+    dest=/tmp
+  when: not st.stat.exists
+
+- name: Copy Elasticsearch
+  shell: cp -r /tmp/elasticsearch-{{elasticsearch_version}} {{elasticsearch_dir}} creates={{elasticsearch_dir}}/bin
+  when: not st.stat.exists
+
+- name:
+  lineinfile:
+    dest=/home/{{user}}/.bashrc
+    line='export PATH=$PATH:{{elasticsearch_dir}}/bin'

@@ -1,0 +1,3 @@
+zeppelin_version: 0.5.5-incubating
+zeppelin_dir: /home/{{user}}/zeppelin-{{zeppelin_version}}
+zeppelin_download_url: http://apache.crihan.fr/dist/incubator/zeppelin/{{zeppelin_version}}/zeppelin-{{zeppelin_version}}-bin-all.tgz

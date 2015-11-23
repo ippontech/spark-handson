@@ -1,0 +1,22 @@
+- name: Check that Zeppelin is installed
+  stat:
+    path={{zeppelin_dir}}/bin
+  register: st
+
+- name: Download Zeppelin
+  get_url:
+    url={{zeppelin_download_url}}
+    dest=/tmp/zeppelin-{{zeppelin_version}}-bin-all.tgz
+    timeout=60
+  when: not st.stat.exists
+
+- name: Extract Zeppelin
+  unarchive:
+    src=/tmp/zeppelin-{{zeppelin_version}}-bin-all.tgz
+    copy=no
+    dest=/tmp
+  when: not st.stat.exists
+
+- name: Copy Zeppelin
+  shell: cp -r /tmp/zeppelin-{{zeppelin_version}}-bin-all {{zeppelin_dir}} creates={{zeppelin_dir}}/bin
+  when: not st.stat.exists
