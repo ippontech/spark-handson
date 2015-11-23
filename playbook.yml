@@ -8,7 +8,7 @@
       - oracle-java7-installer
 
   roles:
-    - { role: desktop, sudo: true }
+    #- { role: desktop, sudo: true }
     - { role: smola.java, sudo: true }
     - { role: jgoodall.maven3, maven_version: 3.3.3, sudo: true }
     - { role: spark }
