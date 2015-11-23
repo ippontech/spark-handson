@@ -13,7 +13,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.network :private_network, ip: "192.168.51.10"
   config.vm.network :forwarded_port, guest: 22, host: 1233
-  config.vm.network :forwarded_port, guest: 9000, host: 9001
+  config.vm.network :forwarded_port, guest: 8080, host: 8081
 
   config.vm.provider "virtualbox" do |vb|
     vb.name = "Spark Hands On"

@@ -20,3 +20,14 @@
 - name: Copy Zeppelin
   shell: cp -r /tmp/zeppelin-{{zeppelin_version}}-bin-all {{zeppelin_dir}} creates={{zeppelin_dir}}/bin
   when: not st.stat.exists
+
+
+- name: Install the init script
+  template:
+    src=zeppelin.sh
+    dest=/etc/init.d/zeppelin
+    mode=0755
+  notify:
+    - Register the init script
+    - Restart Zeppelin
+  sudo: true

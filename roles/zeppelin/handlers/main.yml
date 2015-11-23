@@ -1,0 +1,9 @@
+- name: Register the init script
+  shell: update-rc.d zeppelin defaults 98 02
+  sudo: true
+
+- name: Restart Zeppelin
+  service:
+    name=zeppelin
+    state=restarted
+  sudo: true
