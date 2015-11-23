@@ -1,3 +1,4 @@
+name,country,gender,type,born,died,styles
 Object,Germany,,Person,,,"['Unknown']"
 Death Cab for Cutie,USA,,Group,1997,,"['Rock','Indie','Pop']"
 Lutricia McNeal,USA,Female,Person,1973-11-27,,"['Rock','Pop','Classic']"
