@@ -19,7 +19,7 @@
     - { role: zeppelin }
     #- { role: idea }
     #- { role: training }
-    - { role: handson, sudo: true }
+    - { role: handson }
 
   tasks:
     - name: Setup the JAVA_HOME

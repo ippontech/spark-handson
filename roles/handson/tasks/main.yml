@@ -1,5 +1,6 @@
 - name: Copy the data
   copy: src=data dest=/
+  sudo: true
 
 - name: Copy Notebooks
   copy: src=notebook dest={{zeppelin_dir}}/
