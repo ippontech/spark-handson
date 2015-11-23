@@ -1,0 +1,1 @@
+export SPARK_SUBMIT_OPTIONS="--jars {{zeppelin_dir}}/jars/commons-csv-1.1.jar,{{zeppelin_dir}}/jars/scala-library-2.10.4.jar,{{zeppelin_dir}}/jars/spark-csv_2.10-1.2.0.jar,{{zeppelin_dir}}/jars/univocity-parsers-1.5.1.jar"
