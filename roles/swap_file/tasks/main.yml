@@ -1,0 +1,19 @@
+- name: Create a swap file
+  shell: fallocate -l 8192m {{swap_file}} creates={{swap_file}}
+  register: st
+
+- name: Set permissions on the Swap file
+  file: path={{swap_file}} mode=0600
+
+- name: Register the swap file
+  shell: mkswap {{swap_file}}
+  when: st.changed
+
+- name: Activate the swap
+  shell: swapon {{swap_file}}
+  when: st.changed
+
+- name: Make the swap permanent
+  lineinfile:
+    dest=/etc/fstab
+    line="{{swap_file}} none swap defaults 0 0"
