@@ -613,7 +613,7 @@
     },
     {
       "title": "distribution des groupes par pays",
-      "text": "val countGroupsPerStyleDF \u003d performersDF.where(performersDF(\"type\") \u003d\u003d\u003d \"Group\")\n    .where(performersDF(\"Country\") !\u003d\u003d \"Unknown\")\n    .groupBy(\"Country\")\n    .count()\nval countGroupsPerStyleOrderedDF \u003d countGroupsPerStyleDF\n    .orderBy(countGroupsPerStyleDF(\"count\").desc)\nz.show(countGroupsPerStyleOrderedDF)",
+      "text": "val countGroupsPerStyleDF \u003d performersDF.where(performersDF(\"type\") \u003d\u003d\u003d \"Group\")\n    .where(performersDF(\"country\") !\u003d\u003d \"Unknown\")\n    .groupBy(\"country\")\n    .count()\nval countGroupsPerStyleOrderedDF \u003d countGroupsPerStyleDF\n    .orderBy(countGroupsPerStyleDF(\"count\").desc)\nz.show(countGroupsPerStyleOrderedDF)",
       "dateUpdated": "Nov 24, 2015 5:31:28 PM",
       "config": {
         "title": false,
